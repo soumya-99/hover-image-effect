@@ -13,6 +13,7 @@ body {
   /* width: 50vmin; */
   position: absolute;
   transform: translate(-50%, -50%);
+  border-radius: 15px;
 }
 
 .image[data-status="inactive"] {

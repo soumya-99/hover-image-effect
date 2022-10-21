@@ -4,9 +4,9 @@ const images = document.getElementsByClassName("image") as HTMLCollectionOf<HTML
 
 let globalIndex: number = 0
 
-let last = { x: 0, y: 0 }
+let last: { x: number, y: number } = { x: 0, y: 0 }
 
-const activate = (img: HTMLImageElement, x: number, y: number) => {
+const activate = (img: HTMLImageElement, x: number, y: number): void => {
     img.style.left = `${x}px`
     img.style.top = `${y}px`
 
@@ -15,19 +15,19 @@ const activate = (img: HTMLImageElement, x: number, y: number) => {
     last = { x, y }
 }
 
-const distanceFromLast = (x: number, y: number) => {
+const distanceFromLast = (x: number, y: number): number => {
     return Math.hypot(x - last.x, y - last.y)
 }
 
-window.onmousemove = (e: MouseEvent) => {
-    if (distanceFromLast(e.clientX, e.clientY) > 100) {
+window.onmousemove = (e: MouseEvent): void => {
+    if (distanceFromLast(e.clientX, e.clientY) > 80) {
         const lead = images[globalIndex % images.length]
-        let tail = images[(globalIndex - 5) % images.length]
-    
+        const tail = images[(globalIndex - 5) % images.length]
+
         activate(lead, e.clientX, e.clientY)
 
         if (tail) tail.dataset.status = "inactive"
-    
+
         globalIndex++
     }
 }
